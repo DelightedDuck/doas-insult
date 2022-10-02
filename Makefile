@@ -7,6 +7,7 @@ PREFIX?=/usr/local
 MANDIR?=$(DESTDIR)$(PREFIX)/man
 SYSCONFDIR?=$(DESTDIR)$(PREFIX)/etc
 DOAS_CONF=$(SYSCONFDIR)/doas.conf
+INSULT_CONF=$(SYSCONFDIR)/insults
 OBJECTS=doas.o env.o compat/execvpe.o compat/reallocarray.o y.tab.o 
 OPT?=-O2
 # Can set GLOBAL_PATH here to set PATH for target user.

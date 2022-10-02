@@ -65,14 +65,45 @@ static struct pam_conv pamc = { pam_tty_conv, NULL };
 
 #include "doas.h"
 
-char wrongpw[] = "Just what do you think you're doing Dave?";
-
 static void 
 usage(void)
 {
 	fprintf(stderr, "usage: doas [-nSs] [-a style] [-C config] [-u user]"
 	    " command [args]\n");
 	exit(1);
+}
+
+char wrongpw[];
+
+void insultgen(const char *file) {
+	FILE *f;
+    int nLines = 0;
+	char line[1024];
+//	extern char wrongpw[];
+    int randLine;
+    int i;
+
+    srand(time(0));
+    f = fopen(file, "r");
+
+	/* 1st pass - count the lines. */
+    while(!feof(f))
+    {
+        fgets(line, 1024, f);
+        nLines++;
+    }
+
+    randLine = rand() % nLines;
+
+	/* 2nd pass - find the line we want. */
+    fseek(f, 0, SEEK_SET);
+    for(i = 0; !feof(f) && i <= randLine; i++)
+	{
+        fgets(line, 1024, f);
+	}
+
+	printf(line);
+	strcpy(wrongpw, line);
 }
 
 static int
@@ -94,8 +125,10 @@ uidcheck(const char *s, uid_t desired)
 
 	if (parseuid(s, &uid) != 0)
 		return -1;
+
 	if (uid != desired)
 		return -1;
+
 	return 0;
 }
 
@@ -174,7 +207,8 @@ parseconfig(const char *filename, int checkperms)
 	extern FILE *yyfp;
 	extern int yyparse(void);
 	struct stat sb;
-
+	
+	printf(filename);
 	yyfp = fopen(filename, "r");
 	if (!yyfp)
 		err(1, checkperms ? "doas is not enabled, %s" :
@@ -489,8 +523,8 @@ main(int argc, char **argv)
 		case PAM_USER_UNKNOWN:
 		case PAM_MAXTRIES:
 			syslog(LOG_AUTHPRIV | LOG_NOTICE,
-			    "failed auth for %s", myname);
-                        errx(EXIT_FAILURE, wrongpw);
+			    "failed auth for %s", myname);    
+				    errx(EXIT_FAILURE, "HELP!");
 			break;
 
 		default:
