@@ -65,6 +65,8 @@ static struct pam_conv pamc = { pam_tty_conv, NULL };
 
 #include "doas.h"
 
+char wrongpw[] = "Just what do you think you're doing Dave?";
+
 static void 
 usage(void)
 {
@@ -488,7 +490,7 @@ main(int argc, char **argv)
 		case PAM_MAXTRIES:
 			syslog(LOG_AUTHPRIV | LOG_NOTICE,
 			    "failed auth for %s", myname);
-                        errx(EXIT_FAILURE, "authentication failed");
+                        errx(EXIT_FAILURE, wrongpw);
 			break;
 
 		default:
