@@ -1,5 +1,5 @@
-# doas
-A port of OpenBSD's doas which runs on FreeBSD, Linux, NetBSD, illumos, macOS and MidnightBSD.
+# doas-insult
+A fork of OpenBSD's doas which insults you ever time you enter the wrong password, similar to sudo's insult feature.
 
 The doas utility is a program originally written for OpenBSD which allows a user to run a command as though they were another user. Typically doas is used to allow non-privileged users to run commands as though they were the root user. The doas program acts as an alternative to sudo, which is a popular method in the Linux community for granting admin access to specific users.
 
@@ -13,6 +13,8 @@ Installing doas is accomplished in three steps:
 1. Installing build tools.
 2. Compiling and installing the doas utility.
 3. Creating a configuration file for doas.
+
+### Forked from a [opendoas port by slicer69](https://github.com/slicer69/doas)
 
 ## Installation via packages/repositories:
 
