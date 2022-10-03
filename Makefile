@@ -7,7 +7,7 @@ PREFIX?=/usr/local
 MANDIR?=$(DESTDIR)$(PREFIX)/man
 SYSCONFDIR?=$(DESTDIR)$(PREFIX)/etc
 DOAS_CONF=$(SYSCONFDIR)/doas.conf
-INSULT_CONF=$(SYSCONFDIR)/
+INSULT_CONF=$(SYSCONFDIR)/insults
 OBJECTS=doas.o env.o compat/execvpe.o compat/reallocarray.o y.tab.o 
 OPT?=-O2
 # Can set GLOBAL_PATH here to set PATH for target user.
@@ -86,7 +86,7 @@ install: $(BIN) $(FINALS)
 	mkdir -p $(MANDIR)/man8
 	cp vidoas.8.final $(MANDIR)/man8/vidoas.8
 	cp doasedit.8 $(MANDIR)/man8/doasedit.8
-	cp insults $(INSULT_CONF)/insults
+	cp insults $(INSULT_CONF)
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/doas
 	rm -f $(DESTDIR)$(PREFIX)/bin/vidoas
