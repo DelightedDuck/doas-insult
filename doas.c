@@ -64,6 +64,8 @@ static struct pam_conv pamc = { pam_tty_conv, NULL };
 #endif /* USE_PAM */
 
 #include "doas.h"
+static char insultdir[] = "/usr/local/etc/insults";
+
 
 static void 
 usage(void)
@@ -79,7 +81,6 @@ void insultgen(const char *file) {
 	FILE *f;
     int nLines = 0;
 	char line[1024];
-//	extern char wrongpw[];
     int randLine;
     int i;
 
@@ -101,10 +102,10 @@ void insultgen(const char *file) {
 	{
         fgets(line, 1024, f);
 	}
-
-	printf(line);
+	
 	strcpy(wrongpw, line);
 }
+
 
 static int
 parseuid(const char *s, uid_t *uid)
@@ -208,7 +209,6 @@ parseconfig(const char *filename, int checkperms)
 	extern int yyparse(void);
 	struct stat sb;
 	
-	printf(filename);
 	yyfp = fopen(filename, "r");
 	if (!yyfp)
 		err(1, checkperms ? "doas is not enabled, %s" :
@@ -309,6 +309,7 @@ good:
 int
 main(int argc, char **argv)
 {
+	void insultgen();
 	const char *safepath = SAFE_PATH;
 	const char *confpath = NULL;
 	char *shargv[] = { NULL, NULL };
@@ -522,9 +523,10 @@ main(int argc, char **argv)
 		case PAM_AUTH_ERR:
 		case PAM_USER_UNKNOWN:
 		case PAM_MAXTRIES:
+			insultgen(insultdir);
 			syslog(LOG_AUTHPRIV | LOG_NOTICE,
 			    "failed auth for %s", myname);    
-				    errx(EXIT_FAILURE, "HELP!");
+				    errx(EXIT_FAILURE, wrongpw);
 			break;
 
 		default:
