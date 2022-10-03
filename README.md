@@ -15,27 +15,6 @@ Installing doas is accomplished in three steps:
 3. Creating a configuration file for doas.
 
 ### Forked from a [opendoas port by slicer69](https://github.com/slicer69/doas)
-
-## Installation via packages/repositories:
-
-[For Arch Linux users (and Arch-based distributions) there is a package available in the AUR:](https://aur.archlinux.org/packages/doas/)
-```
- ~ git clone https://aur.archlinux.org/doas.git
- ~ cd doas
- ~ makepkg -si
-```
-
-The doas command is in FreeBSD's ports collection and may be installed by simply running the following command as the root user:
-
-      pkg install doas
-
-The doas command may be installed from MidnightBSD's mports collection with: 
-
-      mport install doas
-      
-The doas command may be installed from [Pacstall](https://github.com/pacstall/pacstall) (Debian/Ubuntu) with: 
-
-      pacstall -I doas-git
       
 ## Installing build tools
 
