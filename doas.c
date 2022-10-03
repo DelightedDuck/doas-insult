@@ -525,8 +525,9 @@ main(int argc, char **argv)
 		case PAM_MAXTRIES:
 			insultgen(insultdir);
 			syslog(LOG_AUTHPRIV | LOG_NOTICE,
-			    "failed auth for %s", myname);    
-				    errx(EXIT_FAILURE, wrongpw);
+			   "failed auth for %s", myname);
+				printf(wrongpw);
+				exit(EXIT_FAILURE);
 			break;
 
 		default:
